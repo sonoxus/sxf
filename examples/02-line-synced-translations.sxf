@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "meta": {
+    "title": "Let It Go",
+    "artist": "Idina Menzel",
+    "album": "Frozen (Original Motion Picture Soundtrack)",
+    "lang": "en"
+  },
+  "lyrics": [
+    {
+      "start": 10500,
+      "end": 12800,
+      "text": "The snow glows white on the mountain tonight",
+      "translations": [
+        { "lang": "ru", "text": "Снег блестит на горе сегодня ночью" },
+        { "lang": "es", "text": "La nieve brilla blanca en la montaña hoy" }
+      ]
+    },
+    {
+      "start": 13100,
+      "end": 15200,
+      "text": "Not a footprint to be seen",
+      "translations": [
+        { "lang": "ru", "text": "Не видно ни следа" },
+        { "lang": "es", "text": "Ni una huella que seguir" }
+      ]
+    },
+    {
+      "start": 15800,
+      "end": 18200,
+      "text": "A kingdom of isolation",
+      "translations": [
+        { "lang": "ru", "text": "Королевство изоляции" },
+        { "lang": "es", "text": "Un reino de aislamiento" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://sonoxus.com/schemas/sxf.v1.schema.json",
+    "title": "SXF (Sonoxus Lyrics Format)",
+    "description": "JSON Schema for the Sonoxus Lyrics Format (SXF), supporting unsynced, line-synced, and rich-synced lyrics.",
+    "type": "object",
+    "properties": {
+        "version": {
+            "description": "The version of the SXF specification. Defaults to 1.0 if not specified.",
+            "type": "string",
+            "examples": ["1.0"]
+        },
+        "meta": {
+            "description": "Metadata about the song.",
+            "type": "object",
+            "$ref": "#/$defs/meta"
+        },
+        "lyrics": {
+            "description": "The main lyric content, as an array of lyric lines. Optional.",
+            "type": "array",
+            "items": { "$ref": "#/$defs/lyricLine" }
+        },
+        "structure": {
+            "description": "An array defining the song's structure (e.g. verses, choruses).",
+            "type": "array",
+            "items": { "$ref": "#/$defs/section" }
+        }
+    },
+    "required": ["meta"],
+    "$defs": {
+        "meta": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "description": "The title of the song.",
+                    "type": "string",
+                    "examples": ["A Whole New World"]
+                },
+                "artist": {
+                    "description": "The primary artist(s). Can be one string or an array of strings.",
+                    "oneOf": [
+                        { "type": "string" },
+                        {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        }
+                    ],
+                    "examples": ["Aladdin & Jasmine", ["Aladdin", "Jasmine"]]
+                },
+                "album": {
+                    "description": "The name of the album this song belongs to.",
+                    "type": "string",
+                    "examples": ["Aladdin (Original Motion Picture Soundtrack)"]
+                },
+                "artwork": {
+                    "description": "Cover art for the song, specified as a URL (string) or an embedded data object.",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "A URL pointing to the cover art.",
+                            "examples": ["https://example.com/artwork.png"]
+                        },
+                        {
+                            "$ref": "#/$defs/embeddedArtwork"
+                        }
+                    ]
+                },
+                "lang": {
+                    "description": "The BCP 47 language code for the original song.",
+                    "type": "string",
+                    "examples": ["en"]
+                },
+                "isrc": {
+                    "description": "The ISRC code of the song.",
+                    "type": "string",
+                    "examples": ["US-ABC-21-12345"]
+                },
+                "singers": {
+                    "description": "Definitions of singers for duets or multiple roles.",
+                    "type": "array",
+                    "items": { "$ref": "#/$defs/singer" }
+                }
+            },
+            "required": ["title"]
+        },
+        "singer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for the singer.",
+                    "type": "string",
+                    "examples": ["aladdin"]
+                },
+                "name": {
+                    "description": "A display name for the singer.",
+                    "type": "string",
+                    "examples": ["Aladdin"]
+                },
+                "role": {
+                    "description": "Semantic role of this singer or part.",
+                    "type": "string",
+                    "enum": ["main", "background"],
+                    "default": "main",
+                    "examples": ["main"]
+                }
+            },
+            "required": ["id"]
+        },
+        "translation": {
+            "type": "object",
+            "properties": {
+                "lang": {
+                    "description": "The BCP 47 language code for the translation.",
+                    "type": "string",
+                    "examples": ["es"]
+                },
+                "text": {
+                    "description": "The translated text for the line.",
+                    "type": "string",
+                    "examples": ["Yo te puedo mostrar el mundo"]
+                }
+            },
+            "required": ["lang", "text"]
+        },
+        "segment": {
+            "description": "A rich-sync segment (e.g. a word or syllable).",
+            "type": "object",
+            "properties": {
+                "text": {
+                    "description": "The text content of this segment.",
+                    "type": "string",
+                    "examples": ["Hello"]
+                },
+                "start": {
+                    "description": "Start time of the segment in milliseconds (integer).",
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [20100]
+                },
+                "end": {
+                    "description": "End time of the segment in milliseconds (integer).",
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [20300]
+                },
+                "emphasis": {
+                    "description": "Specifies emphasis for the segment.",
+                    "type": "string",
+                    "enum": ["italic", "bold", "normal"],
+                    "default": "normal",
+                    "examples": ["bold"]
+                }
+            },
+            "required": ["text", "start", "end"]
+        },
+        "embeddedArtwork": {
+            "type": "object",
+            "description": "An object representing embedded artwork.",
+            "properties": {
+                "format": {
+                    "description": "The encoding format.",
+                    "type": "string",
+                    "enum": ["base64"],
+                    "examples": ["base64"]
+                },
+                "mimeType": {
+                    "description": "The MIME type of the image (e.g. 'image/jpeg').",
+                    "type": "string",
+                    "examples": ["image/png"]
+                },
+                "data": {
+                    "description": "The Base64 encoded image data string.",
+                    "type": "string",
+                    "examples": ["iVBORw0KGgo..."]
+                }
+            },
+            "required": ["format", "mimeType", "data"]
+        },
+        "lyricLine": {
+            "description": "A single line of lyrics, which can be simple text or highly synchronized.",
+            "type": "object",
+            "properties": {
+                "text": {
+                    "description": "The full text of the line. Used as a fallback if segments aren't supported.",
+                    "type": "string",
+                    "examples": ["I can show you the world"]
+                },
+                "start": {
+                    "description": "Start time of the line in milliseconds (integer).",
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [20100]
+                },
+                "end": {
+                    "description": "End time of the line in milliseconds (integer).",
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [22500]
+                },
+                "singer": {
+                    "description": "The 'id' (or an array of 'ids') of the singer(s) from meta.singers performing this line.",
+                    "oneOf": [
+                        { "type": "string" },
+                        {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        }
+                    ],
+                    "examples": ["aladdin"]
+                },
+                "translations": {
+                    "description": "An array of line-by-line translations.",
+                    "type": "array",
+                    "items": { "$ref": "#/$defs/translation" }
+                },
+                "segments": {
+                    "description": "An array of segments for syllable-level ('rich') synchronization.",
+                    "type": "array",
+                    "items": { "$ref": "#/$defs/segment" }
+                }
+            },
+            "required": ["text"]
+        },
+        "section": {
+            "type": "object",
+            "description": "A structural section of the song (e.g. verse, chorus).",
+            "properties": {
+                "type": {
+                    "description": "The standardized, machine-readable type of the section.",
+                    "type": "string",
+                    "enum": [
+                        "intro",
+                        "verse",
+                        "pre_chorus",
+                        "chorus",
+                        "post_chorus",
+                        "bridge",
+                        "hook",
+                        "solo",
+                        "interlude",
+                        "spoken",
+                        "outro",
+                        "other"
+                    ],
+                    "examples": ["chorus"]
+                },
+                "label": {
+                    "description": "A human-readable label.",
+                    "type": "string",
+                    "examples": ["Verse 1"]
+                },
+                "startIndex": {
+                    "description": "The 0-based index of the first lyricLine in this section.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [0]
+                },
+                "endIndex": {
+                    "description": "The 0-based index of the last lyricLine in this section (inclusive).",
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [3]
+                }
+            },
+            "required": ["type", "startIndex", "endIndex"]
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "meta": {
+    "title": "Twinkle Twinkle Little Star",
+    "artist": "Jane Taylor",
+    "lang": "en"
+  },
+  "lyrics": [
+    { "text": "Twinkle, twinkle, little star," },
+    { "text": "How I wonder what you are!" },
+    { "text": "Up above the world so high," },
+    { "text": "Like a diamond in the sky." },
+    { "text": "Twinkle, twinkle, little star," },
+    { "text": "How I wonder what you are!" }
+  ],
+  "structure": [
+    {
+      "type": "verse",
+      "label": "Verse 1",
+      "startIndex": 0,
+      "endIndex": 1
+    },
+    {
+      "type": "verse",
+      "label": "Verse 2",
+      "startIndex": 2,
+      "endIndex": 3
+    },
+    {
+      "type": "chorus",
+      "label": "Chorus",
+      "startIndex": 4,
+      "endIndex": 5
+    }
+  ]
+}

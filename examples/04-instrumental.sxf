@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "meta": {
+    "title": "Main Title (Theme from 'Game of Thrones')",
+    "artist": "Ramin Djawadi",
+    "album": "Game of Thrones (Music from the HBO® Series)",
+    "artwork": "https://example.com/got-artwork.jpg",
+    "lang": "zxx" 
+  }
+}
