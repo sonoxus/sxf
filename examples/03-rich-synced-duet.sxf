@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "meta": {
+    "title": "A Whole New World",
+    "artist": "Aladdin & Jasmine",
+    "album": "Aladdin (Original Motion Picture Soundtrack)",
+    "singers": [
+      {
+        "id": "aladdin",
+        "name": "Aladdin",
+        "role": "main"
+      },
+      {
+        "id": "jasmine",
+        "name": "Jasmine",
+        "role": "main"
+      }
+    ],
+    "lang": "en",
+    "isrc": "US-GF1-99-12345"
+  },
+  "lyrics": [
+    {
+      "start": 20100,
+      "end": 22500,
+      "text": "I can show you the world",
+      "singer": "aladdin",
+      "segments": [
+        { "text": "I ", "start": 20100, "end": 20300 },
+        { "text": "can ", "start": 20300, "end": 20600 },
+        { "text": "show ", "start": 20600, "end": 20900 },
+        { "text": "you ", "start": 20900, "end": 21200 },
+        { "text": "the ", "start": 21200, "end": 21400 },
+        {
+          "text": "world",
+          "emphasis": "bold",
+          "start": 21400,
+          "end": 22500
+        }
+      ]
+    },
+    {
+      "start": 23000,
+      "end": 25800,
+      "text": "Shining, shimmering, splendid",
+      "singer": "jasmine",
+      "segments": [
+        { "text": "Shi", "start": 23000, "end": 23300 },
+        { "text": "ning, ", "start": 23300, "end": 23800 },
+        { "text": "shim", "start": 23800, "end": 24200 },
+        { "text": "mering, ", "start": 24200, "end": 24900 },
+        { "text": "splen", "start": 24900, "end": 25400 },
+        { "text": "did", "start": 25400, "end": 25800 }
+      ]
+    },
+    {
+      "start": 26000,
+      "end": 29000,
+      "text": "Tell me, princess, now when did",
+      "singer": "aladdin"
+    },
+    {
+      "start": 29100,
+      "end": 31500,
+      "text": "You last let your heart decide?",
+      "singer": "aladdin"
+    }
+  ],
+  "structure": [
+    {
+      "type": "verse",
+      "label": "Verse 1",
+      "startIndex": 0,
+      "endIndex": 3
+    }
+  ]
+}
